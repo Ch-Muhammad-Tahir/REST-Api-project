@@ -18,7 +18,10 @@ class _FakeUsersState extends State<FakeUsers> {
         appBar: AppBar(
           title: const Text("REST Api Call"),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: fetchUser),
+        floatingActionButton: FloatingActionButton(
+          onPressed: fetchUser,
+          child: const Icon(Icons.get_app),
+        ),
         body: ListView.separated(
           itemBuilder: (context, index) {
             return ListTile(
@@ -47,7 +50,7 @@ class _FakeUsersState extends State<FakeUsers> {
 
   void fetchUser() async {
     print("Fatch User Called");
-    var url = "https://randomuser.me/api/?results=10";
+    var url = "https://randomuser.me/api/?results=100";
     var uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
@@ -61,7 +64,6 @@ class _FakeUsersState extends State<FakeUsers> {
         users.add(Users.formJson(element));
       }
     }
-    for (var user in users) {}
     // print('Body: $json');
 
     setState(() {});
