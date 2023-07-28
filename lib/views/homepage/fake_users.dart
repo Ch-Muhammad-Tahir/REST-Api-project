@@ -50,6 +50,7 @@ class _FakeUsersState extends State<FakeUsers> {
 
   void fetchUser() async {
     print("Fatch User Called");
+    showToast(context, "Data Fatching Form Api");
     var url = "https://randomuser.me/api/?results=100";
     var uri = Uri.parse(url);
     final response = await http.get(uri);
@@ -68,5 +69,17 @@ class _FakeUsersState extends State<FakeUsers> {
 
     setState(() {});
     print("Function End Point");
+  }
+
+  void showToast(BuildContext context, String text) {
+    var scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(SnackBar(
+      content: Text(text),
+      behavior: SnackBarBehavior.floating,
+      action: SnackBarAction(
+        label: "Okay",
+        onPressed: scaffold.hideCurrentSnackBar,
+      ),
+    ));
   }
 }
